@@ -34,29 +34,22 @@ spec:
             {{- toYaml .Values.backend.securityContext | nindent 12 }}
           image: "{{ .Values.backend.image.repository }}:{{ .Values.backend.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.backend.image.pullPolicy }}
-          env:
-            - name: JDBC_URL
-              value: "{{ .Values.configuration.jdbcUrl }}"
-            - name: JDBC_USER
-              value: "{{ .Values.configuration.jdbcUser }}"
-            - name: JDBC_PASS
-              value: "{{ .Values.configuration.jdbcPassword }}"
-            - name: MAIL_HOST
-              value: "{{ .Values.configuration.mailHost }}"
-            - name: MAIL_PORT
-              value: "{{ .Values.configuration.mailPort }}"
-            - name: MAIL_USER
-              value: "{{ .Values.configuration.mailUser }}"
-            - name: MAIL_PASSWORD
-              value: "{{ .Values.configuration.mailPassword }}"
-            - name: MAIL_FROM
-              value: "{{ .Values.configuration.mailFrom }}"
-            - name: STATUS_UPDATE_BODY_TEMPLATE
-              value: "{{ .Values.configuration.statusUpdateBodyTemplate }}"
-            - name: STATUS_UPDATE_SUBJECT_TEMPLATE
-              value: "{{ .Values.configuration.statusUpdateSubjectTemplate }}"
-            - name: ADAPTER_API_KEY
-              value: "{{ .Values.configuration.adapterApiKey }}"
+          env: {{ if (not .Values.backend.deployment.env) }}[]{{ end }}
+            {{- range $key, $value := .Values.backend.deployment.env }}
+            - name: {{ $key }}
+            {{- if (not $value.type) }}
+              value: {{ $value.value | quote }}
+            {{- else if eq $value.type "fieldPath" }}
+              valueFrom:
+                fieldRef:
+                  fieldPath: {{ $value.value }}
+            {{- else if eq $value.type "secretKeyRef" }}
+              valueFrom:
+                secretKeyRef:
+                  key: {{ $value.key }}
+                  name: {{ $value.name }}
+            {{- end }}
+            {{- end }}
           ports:
             - name: http
               containerPort: {{ .Values.backend.service.port }}

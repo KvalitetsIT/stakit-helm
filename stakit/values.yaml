@@ -6,19 +6,6 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
-configuration:
-  jdbcUrl: 
-  jdbcUser: 
-  jdbcPassword: 
-  mailHost: 
-  mailPort: 587
-  mailUser: 
-  mailPassword: 
-  mailFrom: 
-  statusUpdateBodyTemplate: 
-  statusUpdateSubjectTemplate: 
-  adapterApiKey: 
-
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
@@ -36,6 +23,30 @@ backend:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: "dev"
+  deployment:
+    env: 
+      JDBC_URL:
+        value: 
+      JDBC_USER: 
+        value: 
+      JDBC_PASS: 
+        value: 
+      MAIL_HOST: 
+        value: 
+      MAIL_PORT:
+        value: 587
+      MAIL_USER: 
+        value: 
+      MAIL_PASSWORD: 
+        value: 
+      MAIL_FROM: 
+        value: 
+      STATUS_UPDATE_BODY_TEMPLATE: 
+        value: 
+      STATUS_UPDATE_SUBJECT_TEMPLATE: 
+        value: 
+      ADAPTER_API_KEY: 
+        value: 
 
   podAnnotations: {}
 
@@ -103,10 +114,6 @@ frontend:
     pullPolicy: IfNotPresent
     # Overrides the image tag whose default is the chart appVersion.
     tag: "dev"
-
-  imagePullSecrets: []
-  nameOverride: ""
-  fullnameOverride: ""
 
   podAnnotations: {}
 
