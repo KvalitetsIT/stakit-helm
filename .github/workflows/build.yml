@@ -35,7 +35,7 @@ jobs:
         run: echo ::set-output name=VERSION::'0.0.0'
 
       - name: Build and test helm chart
-        run: ./build/build-helm.sh service ${{ steps.tag.outputs.VERSION }} ${{ steps.trunk.outputs.VERSION }}
+        run: ./build/build-helm.sh stakit ${{ steps.tag.outputs.VERSION }} ${{ steps.trunk.outputs.VERSION }}
 
       - name: Push tagged helm chart to repo
         if: ${{ steps.tag.conclusion != 'skipped' }}
