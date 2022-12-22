@@ -47,6 +47,8 @@ backend:
         value: 
       ADAPTER_API_KEY: 
         value: 
+      JWT_SIGNING_KEY:
+        value:
 
   podAnnotations: {}
 
