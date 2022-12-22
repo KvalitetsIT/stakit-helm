@@ -29,6 +29,7 @@ jobs:
         id: tag
         if:  ${{ startsWith(github.ref, 'refs/tags/v') }}
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\/v/}
+
       - name: Is Trunk Build
         id: trunk
         if:  ${{ !startsWith(github.ref, 'refs/tags/v') }}
@@ -37,10 +38,10 @@ jobs:
       - name: Build and test helm chart
         run: ./build/build-helm.sh stakit ${{ steps.tag.outputs.VERSION }} ${{ steps.trunk.outputs.VERSION }}
 
+      - name: Update documentation
+        if: ${{ steps.trunk.conclusion != 'skipped' }}
+        run: ./build/helm-docs.sh
+
       - name: Push tagged helm chart to repo
         if: ${{ steps.tag.conclusion != 'skipped' }}
         run: ./build/push-repo.sh ${{ secrets.KIT_GITHUB_ACCESS }}
-
-#      - name: Push main helm chart to repo
-#        if: ${{ steps.trunk.conclusion != 'skipped' }}
-#        run: ./build/push-repo.sh ${{ secrets.KIT_GITHUB_ACCESS }}
