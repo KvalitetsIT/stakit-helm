@@ -14,6 +14,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | backend.autoscaling.minReplicas | int | `1` |  |
 | backend.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | backend.deployment.env.ADAPTER_API_KEY.value | string | `nil` |  |
+| backend.deployment.env.ALLOWED_ORIGINS.value | string | `nil` |  |
 | backend.deployment.env.JDBC_PASS.value | string | `nil` |  |
 | backend.deployment.env.JDBC_URL.value | string | `nil` |  |
 | backend.deployment.env.JDBC_USER.value | string | `nil` |  |
