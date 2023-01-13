@@ -47,6 +47,9 @@ backend:
         value: 
       ADAPTER_API_KEY: 
         value: 
+      # Comma seperated list of origins. Usually set to the same host as your ingress host.
+      ALLOWED_ORIGINS:
+        value: 
 
   podAnnotations: {}
 
