@@ -121,6 +121,24 @@ frontend:
     # Overrides the image tag whose default is the chart appVersion.
     tag: "dev"
 
+  deployment:
+    env: 
+      REACT_APP_KEYCLOAK_URL:
+        # -- Keycloak endpoint. 
+        value: 
+      REACT_APP_KEYCLOAK_REALM:
+        # -- Keycloak realm. 
+        value: 
+      REACT_APP_KEYCLOAK_CLIENTID:
+        # -- Keycloak client id. 
+        value: 
+      REACT_APP_INACTIVITY_MAX_MINUTES:
+        # -- Max inactivity
+        value: '30'
+      REACT_APP_API_BASEURL:
+        # -- API base url
+        value: 'api/v1/'      
+
   podAnnotations: {}
 
   podSecurityContext: {}
