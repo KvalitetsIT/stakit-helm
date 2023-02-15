@@ -55,6 +55,11 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | frontend.autoscaling.maxReplicas | int | `100` |  |
 | frontend.autoscaling.minReplicas | int | `1` |  |
 | frontend.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
+| frontend.deployment.env.REACT_APP_API_BASEURL.value | string | `"api/v1/"` | API base url |
+| frontend.deployment.env.REACT_APP_INACTIVITY_MAX_MINUTES.value | string | `"30"` | Max inactivity |
+| frontend.deployment.env.REACT_APP_KEYCLOAK_CLIENTID.value | string | `nil` | Keycloak client id.  |
+| frontend.deployment.env.REACT_APP_KEYCLOAK_REALM.value | string | `nil` | Keycloak realm.  |
+| frontend.deployment.env.REACT_APP_KEYCLOAK_URL.value | string | `nil` | Keycloak endpoint.  |
 | frontend.image.pullPolicy | string | `"IfNotPresent"` |  |
 | frontend.image.repository | string | `"kvalitetsit/stakit-frontend"` |  |
 | frontend.image.tag | string | `"dev"` |  |
