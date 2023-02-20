@@ -18,6 +18,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | backend.deployment.env.JDBC_PASS.value | string | `nil` |  |
 | backend.deployment.env.JDBC_URL.value | string | `nil` |  |
 | backend.deployment.env.JDBC_USER.value | string | `nil` |  |
+| backend.deployment.env.JWT_SIGNING_KEY.value | string | `nil` |  |
 | backend.deployment.env.MAIL_FROM.value | string | `nil` |  |
 | backend.deployment.env.MAIL_HOST.value | string | `nil` |  |
 | backend.deployment.env.MAIL_PASSWORD.value | string | `nil` |  |
