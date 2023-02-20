@@ -25,7 +25,7 @@ spec:
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      serviceAccountName: {{ include "stakit.serviceAccountName" . }}
+      automountServiceAccountToken: false
       securityContext:
         {{- toYaml .Values.frontend.podSecurityContext | nindent 8 }}
       containers:
@@ -34,6 +34,22 @@ spec:
             {{- toYaml .Values.frontend.securityContext | nindent 12 }}
           image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+          env: {{ if (not .Values.frontend.deployment.env) }}[]{{ end }}
+            {{- range $key, $value := .Values.frontend.deployment.env }}
+            - name: {{ $key }}
+            {{- if (not $value.type) }}
+              value: {{ $value.value | quote }}
+            {{- else if eq $value.type "fieldPath" }}
+              valueFrom:
+                fieldRef:
+                  fieldPath: {{ $value.value }}
+            {{- else if eq $value.type "secretKeyRef" }}
+              valueFrom:
+                secretKeyRef:
+                  key: {{ $value.key }}
+                  name: {{ $value.name }}
+            {{- end }}
+            {{- end }}          
           ports:
             - name: http
               containerPort: {{ .Values.frontend.service.port }}

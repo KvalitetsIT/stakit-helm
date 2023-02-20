@@ -54,14 +54,3 @@ app.kubernetes.io/instance: {{ .Release.Name }}-backend
 app.kubernetes.io/name: {{ include "stakit.name" . }}-frontend
 app.kubernetes.io/instance: {{ .Release.Name }}-frontend
 {{- end }}
-
-{{/*
-Create the name of the service account to use
-*/}}
-{{- define "stakit.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "stakit.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
-{{- end }}

@@ -49,19 +49,25 @@ backend:
         value: 
       JWT_SIGNING_KEY:
         value:
+      # Comma seperated list of origins. Usually set to the same host as your ingress host.
+      ALLOWED_ORIGINS:
+        value: 
 
   podAnnotations: {}
 
   podSecurityContext: {}
-    # fsGroup: 2000
 
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+  securityContext:
+    capabilities:
+      drop:
+        - ALL
+    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+    runAsNonRoot: true
+    runAsUser: 11000
+    runAsGroup: 11000
+    seccompProfile:
+      type: RuntimeDefault
 
   service:
     type: ClusterIP
@@ -117,18 +123,43 @@ frontend:
     # Overrides the image tag whose default is the chart appVersion.
     tag: "dev"
 
+  deployment:
+    env: 
+      REACT_APP_KEYCLOAK_URL:
+        # -- Keycloak endpoint. 
+        value: 
+      REACT_APP_KEYCLOAK_REALM:
+        # -- Keycloak realm. 
+        value: 
+      REACT_APP_KEYCLOAK_CLIENTID:
+        # -- Keycloak client id. 
+        value: 
+      REACT_APP_INACTIVITY_MAX_MINUTES:
+        # -- Max inactivity
+        value: '30'
+      REACT_APP_API_BASEURL:
+        # -- API base url
+        value: 'api/v1/'      
+
   podAnnotations: {}
 
   podSecurityContext: {}
-    # fsGroup: 2000
 
-  securityContext: {}
-    # capabilities:
-    #   drop:
-    #   - ALL
-    # readOnlyRootFilesystem: true
-    # runAsNonRoot: true
-    # runAsUser: 1000
+  securityContext:
+    capabilities:
+      drop:
+        - ALL
+      add:
+        - CAP_CHOWN
+        - CAP_SETGID
+        - CAP_SETUID
+#    readOnlyRootFilesystem: true
+    allowPrivilegeEscalation: false
+#    runAsNonRoot: true
+#    runAsUser: 11000
+#    runAsGroup: 11000
+    seccompProfile:
+      type: RuntimeDefault
 
   service:
     type: ClusterIP
