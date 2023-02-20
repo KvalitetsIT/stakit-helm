@@ -21,8 +21,8 @@ backend:
   image:
     repository: kvalitetsit/stakit-backend
     pullPolicy: IfNotPresent
-    # Overrides the image tag whose default is the chart appVersion.
-    tag: "dev"
+    # -- Overrides the image tag whose default is the chart appVersion.
+    tag: "0.0.3"
   deployment:
     env: 
       JDBC_URL:
@@ -49,7 +49,7 @@ backend:
         value: 
       JWT_SIGNING_KEY:
         value:
-      # Comma seperated list of origins. Usually set to the same host as your ingress host.
+      # -- Comma seperated list of origins. Usually set to the same host as your ingress host.
       ALLOWED_ORIGINS:
         value: 
 
@@ -120,8 +120,8 @@ frontend:
   image:
     repository: kvalitetsit/stakit-frontend
     pullPolicy: IfNotPresent
-    # Overrides the image tag whose default is the chart appVersion.
-    tag: "dev"
+    # -- Overrides the image tag whose default is the chart appVersion.
+    tag: "0.0.1"
 
   deployment:
     env: 
