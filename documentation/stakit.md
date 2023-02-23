@@ -28,7 +28,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | backend.deployment.env.STATUS_UPDATE_SUBJECT_TEMPLATE.value | string | `nil` |  |
 | backend.image.pullPolicy | string | `"IfNotPresent"` |  |
 | backend.image.repository | string | `"kvalitetsit/stakit-backend"` |  |
-| backend.image.tag | string | `"0.0.3"` | Overrides the image tag whose default is the chart appVersion. |
+| backend.image.tag | string | `"0.0.5"` | Overrides the image tag whose default is the chart appVersion. |
 | backend.ingress.annotations | object | `{}` |  |
 | backend.ingress.className | string | `""` |  |
 | backend.ingress.enabled | bool | `false` |  |
@@ -39,7 +39,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | backend.nodeSelector | object | `{}` |  |
 | backend.podAnnotations | object | `{}` |  |
 | backend.podSecurityContext | object | `{}` |  |
-| backend.replicaCount | int | `1` |  |
+| backend.replicaCount | int | `2` |  |
 | backend.resources | object | `{}` |  |
 | backend.securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | backend.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
@@ -56,7 +56,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | frontend.autoscaling.maxReplicas | int | `100` |  |
 | frontend.autoscaling.minReplicas | int | `1` |  |
 | frontend.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| frontend.deployment.env.REACT_APP_API_BASEURL.value | string | `"api/v1/"` | API base url |
+| frontend.deployment.env.REACT_APP_API_BASEURL.value | string | `"/api/v1/"` | API base url |
 | frontend.deployment.env.REACT_APP_INACTIVITY_MAX_MINUTES.value | string | `"30"` | Max inactivity |
 | frontend.deployment.env.REACT_APP_KEYCLOAK_CLIENTID.value | string | `nil` | Keycloak client id.  |
 | frontend.deployment.env.REACT_APP_KEYCLOAK_REALM.value | string | `nil` | Keycloak realm.  |
@@ -74,7 +74,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | frontend.nodeSelector | object | `{}` |  |
 | frontend.podAnnotations | object | `{}` |  |
 | frontend.podSecurityContext | object | `{}` |  |
-| frontend.replicaCount | int | `1` |  |
+| frontend.replicaCount | int | `2` |  |
 | frontend.resources | object | `{}` |  |
 | frontend.securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | frontend.securityContext.capabilities.add[0] | string | `"CAP_CHOWN"` |  |
