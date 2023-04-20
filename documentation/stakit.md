@@ -28,7 +28,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | backend.deployment.env.STATUS_UPDATE_SUBJECT_TEMPLATE.value | string | `nil` |  |
 | backend.image.pullPolicy | string | `"IfNotPresent"` |  |
 | backend.image.repository | string | `"kvalitetsit/stakit-backend"` |  |
-| backend.image.tag | string | `"0.0.5"` | Overrides the image tag whose default is the chart appVersion. |
+| backend.image.tag | string | `"0.0.9"` | Overrides the image tag whose default is the chart appVersion. |
 | backend.ingress.annotations | object | `{}` |  |
 | backend.ingress.className | string | `""` |  |
 | backend.ingress.enabled | bool | `false` |  |
@@ -63,7 +63,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | frontend.deployment.env.REACT_APP_KEYCLOAK_URL.value | string | `nil` | Keycloak endpoint.  |
 | frontend.image.pullPolicy | string | `"IfNotPresent"` |  |
 | frontend.image.repository | string | `"kvalitetsit/stakit-frontend"` |  |
-| frontend.image.tag | string | `"0.0.1"` | Overrides the image tag whose default is the chart appVersion. |
+| frontend.image.tag | string | `"0.0.5"` | Overrides the image tag whose default is the chart appVersion. |
 | frontend.ingress.annotations | object | `{}` |  |
 | frontend.ingress.className | string | `""` |  |
 | frontend.ingress.enabled | bool | `false` |  |
