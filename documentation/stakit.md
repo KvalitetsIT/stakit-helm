@@ -15,6 +15,8 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | backend.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
 | backend.deployment.env.ADAPTER_API_KEY.value | string | `nil` |  |
 | backend.deployment.env.ALLOWED_ORIGINS | object | `{"value":null}` | Comma seperated list of origins. Usually set to the same host as your ingress host. |
+| backend.deployment.env.BASE_URL.value | string | `nil` |  |
+| backend.deployment.env.CHECK_MESSAGES_FREQUENCY.value | string | `"PT5M"` |  |
 | backend.deployment.env.JDBC_PASS.value | string | `nil` |  |
 | backend.deployment.env.JDBC_URL.value | string | `nil` |  |
 | backend.deployment.env.JDBC_USER.value | string | `nil` |  |
@@ -28,7 +30,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | backend.deployment.env.STATUS_UPDATE_SUBJECT_TEMPLATE.value | string | `nil` |  |
 | backend.image.pullPolicy | string | `"IfNotPresent"` |  |
 | backend.image.repository | string | `"kvalitetsit/stakit-backend"` |  |
-| backend.image.tag | string | `"0.0.9"` | Overrides the image tag whose default is the chart appVersion. |
+| backend.image.tag | string | `"0.2.0"` | Overrides the image tag whose default is the chart appVersion. |
 | backend.ingress.annotations | object | `{}` |  |
 | backend.ingress.className | string | `""` |  |
 | backend.ingress.enabled | bool | `false` |  |
@@ -63,7 +65,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | frontend.deployment.env.REACT_APP_KEYCLOAK_URL.value | string | `nil` | Keycloak endpoint.  |
 | frontend.image.pullPolicy | string | `"IfNotPresent"` |  |
 | frontend.image.repository | string | `"kvalitetsit/stakit-frontend"` |  |
-| frontend.image.tag | string | `"0.0.5"` | Overrides the image tag whose default is the chart appVersion. |
+| frontend.image.tag | string | `"0.1.0"` | Overrides the image tag whose default is the chart appVersion. |
 | frontend.ingress.annotations | object | `{}` |  |
 | frontend.ingress.className | string | `""` |  |
 | frontend.ingress.enabled | bool | `false` |  |
