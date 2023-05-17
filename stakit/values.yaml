@@ -22,7 +22,7 @@ backend:
     repository: kvalitetsit/stakit-backend
     pullPolicy: IfNotPresent
     # -- Overrides the image tag whose default is the chart appVersion.
-    tag: "0.0.9"
+    tag: "0.2.0"
   deployment:
     env: 
       JDBC_URL:
@@ -52,6 +52,10 @@ backend:
       # -- Comma seperated list of origins. Usually set to the same host as your ingress host.
       ALLOWED_ORIGINS:
         value: 
+      BASE_URL:
+        value:
+      CHECK_MESSAGES_FREQUENCY:
+        value: PT5M
 
   podAnnotations: {}
 
@@ -121,7 +125,7 @@ frontend:
     repository: kvalitetsit/stakit-frontend
     pullPolicy: IfNotPresent
     # -- Overrides the image tag whose default is the chart appVersion.
-    tag: "0.0.5"
+    tag: "0.1.0"
 
   deployment:
     env: 
