@@ -26,14 +26,32 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       automountServiceAccountToken: false
+      volumes:
+        - emptyDir: {}
+          name: etc
+        - emptyDir: {}
+          name: init
+        - emptyDir: {}
+          name: nginx-cache
+        - emptyDir: {}
+          name: var
+        - emptyDir: {}
+          name: tmp
       securityContext:
         {{- toYaml .Values.frontend.podSecurityContext | nindent 8 }}
-      containers:
+      initContainers:
         - name: {{ .Chart.Name }}-frontend
-          securityContext:
-            {{- toYaml .Values.frontend.securityContext | nindent 12 }}
           image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+          volumeMounts:
+            - mountPath: /temp/etc/nginx
+              name: etc
+            - mountPath: /temp/docker-entrypoint.d
+              name: init
+            - mountPath: /temp/var/cache/nginx
+              name: nginx-cache
+            - mountPath: /temp/var/run
+              name: var
           env: {{ if (not .Values.frontend.deployment.env) }}[]{{ end }}
             {{- range $key, $value := .Values.frontend.deployment.env }}
             - name: {{ $key }}
@@ -49,7 +67,24 @@ spec:
                   key: {{ $value.key }}
                   name: {{ $value.name }}
             {{- end }}
-            {{- end }}          
+            {{- end }}  
+      containers:
+        - name: {{ .Chart.Name }}-frontend
+          securityContext:
+            {{- toYaml .Values.frontend.securityContext | nindent 12 }}
+          image: {{ .Values.frontend.nginxImageOverride | default "nginxinc/nginx-unprivileged:alpine3.17" }}
+          imagePullPolicy: {{ .Values.imagePullPolicy | default "IfNotPresent" }}  
+          volumeMounts:
+            - mountPath: /etc/nginx
+              name: etc
+            - mountPath: /docker-entrypoint.d
+              name: init
+            - mountPath: /var/cache/nginx
+              name: nginx-cache
+            - mountPath: /var/run
+              name: var
+            - mountPath: /tmp
+              name: tmp
           ports:
             - name: http
               containerPort: {{ .Values.frontend.service.port }}
@@ -57,11 +92,19 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: http
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
           readinessProbe:
             httpGet:
               path: /
-              port: http
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
           resources:
             {{- toYaml .Values.frontend.resources | nindent 12 }}        
       {{- with .Values.frontend.nodeSelector }}
