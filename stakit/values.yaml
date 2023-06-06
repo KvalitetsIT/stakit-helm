@@ -20,7 +20,7 @@ backend:
   replicaCount: 2
 
   image:
-    repository: kvalitetsit/stakit-backend:0.2.0
+    repository: kvalitetsit/stakit-backend
     pullPolicy: IfNotPresent
     # -- Overrides the image tag whose default is the chart appVersion.
     tag: "0.2.0"
