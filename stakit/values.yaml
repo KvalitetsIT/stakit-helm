@@ -122,7 +122,8 @@ backend:
 kittyact:
   namespace : default
   name : stakit-frontend
-  image : kvalitetsit/stakit-frontend:0.1.0
+  image : kvalitetsit/stakit-frontend:0.2.0
+  imagePullSecret: kithosting-kit-intern
   frontendUrl : chart-example.local
   replicas: 2
   env: 
