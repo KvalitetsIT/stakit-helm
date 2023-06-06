@@ -4,6 +4,12 @@
 
 A helm chart for deploying Stakit frontend and backend in Kubernetes.
 
+## Requirements
+
+| Repository | Name | Version |
+|------------|------|---------|
+| https://raw.githubusercontent.com/KvalitetsIT/helm-repo/master/ | kittyact | 0.0.3 |
+
 ## Values
 
 | Key | Type | Default | Description |
@@ -29,7 +35,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | backend.deployment.env.STATUS_UPDATE_BODY_TEMPLATE.value | string | `nil` |  |
 | backend.deployment.env.STATUS_UPDATE_SUBJECT_TEMPLATE.value | string | `nil` |  |
 | backend.image.pullPolicy | string | `"IfNotPresent"` |  |
-| backend.image.repository | string | `"kvalitetsit/stakit-backend"` |  |
+| backend.image.repository | string | `"kvalitetsit/stakit-backend:0.2.0"` |  |
 | backend.image.tag | string | `"0.2.0"` | Overrides the image tag whose default is the chart appVersion. |
 | backend.ingress.annotations | object | `{}` |  |
 | backend.ingress.className | string | `""` |  |
@@ -53,43 +59,20 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | backend.service.port | int | `8080` |  |
 | backend.service.type | string | `"ClusterIP"` |  |
 | backend.tolerations | list | `[]` |  |
-| frontend.affinity | object | `{}` |  |
-| frontend.autoscaling.enabled | bool | `false` |  |
-| frontend.autoscaling.maxReplicas | int | `100` |  |
-| frontend.autoscaling.minReplicas | int | `1` |  |
-| frontend.autoscaling.targetCPUUtilizationPercentage | int | `80` |  |
-| frontend.deployment.env.REACT_APP_API_BASEURL.value | string | `"/api/v1/"` | API base url |
-| frontend.deployment.env.REACT_APP_INACTIVITY_MAX_MINUTES.value | string | `"30"` | Max inactivity |
-| frontend.deployment.env.REACT_APP_KEYCLOAK_CLIENTID.value | string | `nil` | Keycloak client id.  |
-| frontend.deployment.env.REACT_APP_KEYCLOAK_REALM.value | string | `nil` | Keycloak realm.  |
-| frontend.deployment.env.REACT_APP_KEYCLOAK_URL.value | string | `nil` | Keycloak endpoint.  |
-| frontend.image.pullPolicy | string | `"IfNotPresent"` |  |
-| frontend.image.repository | string | `"kvalitetsit/stakit-frontend"` |  |
-| frontend.image.tag | string | `"0.1.0"` | Overrides the image tag whose default is the chart appVersion. |
-| frontend.ingress.annotations | object | `{}` |  |
-| frontend.ingress.className | string | `""` |  |
-| frontend.ingress.enabled | bool | `false` |  |
-| frontend.ingress.hosts[0].host | string | `"chart-example.local"` |  |
-| frontend.ingress.hosts[0].paths[0].path | string | `"/"` |  |
-| frontend.ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
-| frontend.ingress.tls | list | `[]` |  |
-| frontend.nodeSelector | object | `{}` |  |
-| frontend.podAnnotations | object | `{}` |  |
-| frontend.podSecurityContext | object | `{}` |  |
-| frontend.replicaCount | int | `2` |  |
-| frontend.resources | object | `{}` |  |
-| frontend.securityContext.allowPrivilegeEscalation | bool | `false` |  |
-| frontend.securityContext.capabilities.add[0] | string | `"CAP_CHOWN"` |  |
-| frontend.securityContext.capabilities.add[1] | string | `"CAP_SETGID"` |  |
-| frontend.securityContext.capabilities.add[2] | string | `"CAP_SETUID"` |  |
-| frontend.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
-| frontend.securityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
-| frontend.service.port | int | `80` |  |
-| frontend.service.type | string | `"ClusterIP"` |  |
-| frontend.tolerations | list | `[]` |  |
-| fullnameOverride | string | `""` |  |
+| fullnameOverride | string | `"stakit"` |  |
 | imagePullSecrets | list | `[]` |  |
+| kittyact.env.REACT_APP_API_BASEURL.value | string | `"/api/v1/"` | API base url |
+| kittyact.env.REACT_APP_INACTIVITY_MAX_MINUTES.value | string | `"30"` | Max inactivity |
+| kittyact.env.REACT_APP_KEYCLOAK_CLIENTID.value | string | `nil` | Keycloak client id.  |
+| kittyact.env.REACT_APP_KEYCLOAK_REALM.value | string | `nil` | Keycloak realm.  |
+| kittyact.env.REACT_APP_KEYCLOAK_URL.value | string | `nil` | Keycloak endpoint.  |
+| kittyact.frontendUrl | string | `"chart-example.local"` |  |
+| kittyact.image | string | `"kvalitetsit/stakit-frontend:0.1.0"` |  |
+| kittyact.name | string | `"stakit-frontend"` |  |
+| kittyact.namespace | string | `"default"` |  |
+| kittyact.replicas | int | `2` |  |
 | nameOverride | string | `""` |  |
+| namespace | string | `"default"` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
