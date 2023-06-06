@@ -67,7 +67,8 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | kittyact.env.REACT_APP_KEYCLOAK_REALM.value | string | `nil` | Keycloak realm.  |
 | kittyact.env.REACT_APP_KEYCLOAK_URL.value | string | `nil` | Keycloak endpoint.  |
 | kittyact.frontendUrl | string | `"chart-example.local"` |  |
-| kittyact.image | string | `"kvalitetsit/stakit-frontend:0.1.0"` |  |
+| kittyact.image | string | `"kvalitetsit/stakit-frontend:0.2.0"` |  |
+| kittyact.imagePullSecret | string | `"kithosting-kit-intern"` |  |
 | kittyact.name | string | `"stakit-frontend"` |  |
 | kittyact.namespace | string | `"default"` |  |
 | kittyact.replicas | int | `2` |  |
