@@ -1,0 +1,149 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "stakit.labels" . | nindent 4 }}
+  name: {{ include "stakit.fullname" . }}-frontend
+  namespace: {{ .Values.namespace | default "default" }}  
+spec:
+  {{- if not .Values.frontend.autoscaling.enabled }}
+  replicas: {{ .Values.frontend.replicaCount }}
+  {{- end }}
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      {{- include "stakit.frontend.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.frontend.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "stakit.frontend.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      affinity:
+        nodeAffinity: null
+        podAffinity: null
+        podAntiAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - podAffinityTerm:
+                labelSelector:
+                  matchLabels:
+                    app.kubernetes.io/instance: {{ include "stakit.fullname" . }}-frontend
+                    app.kubernetes.io/name: {{ include "stakit.fullname" . }}-frontend
+                namespaces:
+                  - {{ .Values.namespace | default "default" }}  
+                topologyKey: kubernetes.io/hostname
+              weight: 1
+      automountServiceAccountToken: false
+      {{- with .Values.frontend.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.frontend.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.frontend.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      containers:
+        - args: []
+          command: []
+          env: []
+          image: {{ .Values.nginxImageOverride | default "nginxinc/nginx-unprivileged:alpine3.17" }}
+          imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          name: {{ include "stakit.fullname" . }}-frontend
+          ports:
+            - containerPort: {{ .Values.frontend.service.port }}
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            {{- toYaml .Values.frontend.resources | nindent 12 }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+          volumeMounts:
+            - mountPath: /etc/nginx
+              name: etc
+            - mountPath: /docker-entrypoint.d
+              name: init
+            - mountPath: /var/cache/nginx
+              name: nginx-cache
+            - mountPath: /var/run
+              name: var
+            - mountPath: /tmp
+              name: tmp
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      initContainers:
+        - image: "{{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
+          env: {{ if (not .Values.frontend.deployment.env) }}[]{{ end }}
+            {{- range $key, $value := .Values.frontend.deployment.env }}
+            - name: {{ $key }}
+            {{- if (not $value.type) }}
+              value: {{ $value.value | quote }}
+            {{- else if eq $value.type "fieldPath" }}
+              valueFrom:
+                fieldRef:
+                  fieldPath: {{ $value.value }}
+            {{- else if eq $value.type "secretKeyRef" }}
+              valueFrom:
+                secretKeyRef:
+                  key: {{ $value.key }}
+                  name: {{ $value.name }}
+            {{- end }}
+            {{- end }}       
+          name: {{ .Chart.Name }}-init
+          volumeMounts:
+            - mountPath: /temp/etc/nginx
+              name: etc
+            - mountPath: /temp/docker-entrypoint.d
+              name: init
+            - mountPath: /temp/var/cache/nginx
+              name: nginx-cache
+            - mountPath: /temp/var/run
+              name: var
+      securityContext: {}
+      serviceAccountName: default
+      volumes:
+        - emptyDir: {}
+          name: etc
+        - emptyDir: {}
+          name: init
+        - emptyDir: {}
+          name: nginx-cache
+        - emptyDir: {}
+          name: var
+        - emptyDir: {}
+          name: tmp
