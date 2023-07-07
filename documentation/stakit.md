@@ -30,7 +30,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | backend.deployment.env.STATUS_UPDATE_SUBJECT_TEMPLATE.value | string | `nil` |  |
 | backend.image.pullPolicy | string | `"IfNotPresent"` |  |
 | backend.image.repository | string | `"kvalitetsit/stakit-backend"` |  |
-| backend.image.tag | string | `"0.2.0"` | Overrides the image tag whose default is the chart appVersion. |
+| backend.image.tag | string | `"0.2.1"` | Overrides the image tag whose default is the chart appVersion. |
 | backend.ingress.annotations | object | `{}` |  |
 | backend.ingress.className | string | `""` |  |
 | backend.ingress.enabled | bool | `false` |  |
