@@ -22,7 +22,7 @@ backend:
     repository: kvalitetsit/stakit-backend
     pullPolicy: IfNotPresent
     # -- Overrides the image tag whose default is the chart appVersion.
-    tag: "0.2.2"
+    tag: "0.3.0"
   deployment:
     env: 
       JDBC_URL:
