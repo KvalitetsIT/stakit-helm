@@ -118,6 +118,10 @@ backend:
 
   affinity: {}
 
+# Overrides default image nginxinc/nginx-unprivileged@sha256:8f14986c54fab310b3c69186d814d6238a771f5569cf073c261e675daba88194
+# referencing nginxinc/nginx-unprivileged:alpine3.19
+nginxImageOverride: ""
+
 frontend:
   replicaCount: 2
 
@@ -125,7 +129,7 @@ frontend:
     repository: kvalitetsit/stakit-frontend
     pullPolicy: IfNotPresent
     # -- Overrides the image tag whose default is the chart appVersion.
-    tag: "0.2.1"
+    tag: "0.2.4"
 
   deployment:
     env: 
