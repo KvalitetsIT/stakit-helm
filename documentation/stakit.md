@@ -65,7 +65,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | frontend.deployment.env.REACT_APP_KEYCLOAK_URL.value | string | `nil` | Keycloak endpoint.  |
 | frontend.image.pullPolicy | string | `"IfNotPresent"` |  |
 | frontend.image.repository | string | `"kvalitetsit/stakit-frontend"` |  |
-| frontend.image.tag | string | `"0.2.1"` | Overrides the image tag whose default is the chart appVersion. |
+| frontend.image.tag | string | `"0.2.4"` | Overrides the image tag whose default is the chart appVersion. |
 | frontend.ingress.annotations | object | `{}` |  |
 | frontend.ingress.className | string | `""` |  |
 | frontend.ingress.enabled | bool | `false` |  |
@@ -90,6 +90,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | fullnameOverride | string | `""` |  |
 | imagePullSecrets | list | `[]` |  |
 | nameOverride | string | `""` |  |
+| nginxImageOverride | string | `""` |  |
 | serviceAccount.annotations | object | `{}` |  |
 | serviceAccount.create | bool | `true` |  |
 | serviceAccount.name | string | `""` |  |
