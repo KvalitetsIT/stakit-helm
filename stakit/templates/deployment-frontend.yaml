@@ -57,7 +57,7 @@ spec:
         - args: []
           command: []
           env: []
-          image: {{ .Values.nginxImageOverride | default "nginxinc/nginx-unprivileged:alpine3.17" }}
+          image: {{ .Values.nginxImageOverride | default "nginxinc/nginx-unprivileged@sha256:8f14986c54fab310b3c69186d814d6238a771f5569cf073c261e675daba88194" }}
           imagePullPolicy: {{ .Values.frontend.image.pullPolicy }}
           livenessProbe:
             httpGet:
