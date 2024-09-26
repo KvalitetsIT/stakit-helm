@@ -65,7 +65,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | frontend.deployment.env.REACT_APP_KEYCLOAK_URL.value | string | `nil` | Keycloak endpoint.  |
 | frontend.image.pullPolicy | string | `"IfNotPresent"` |  |
 | frontend.image.repository | string | `"kvalitetsit/stakit-frontend"` |  |
-| frontend.image.tag | string | `"0.2.4"` | Overrides the image tag whose default is the chart appVersion. |
+| frontend.image.tag | string | `"0.2.5"` | Overrides the image tag whose default is the chart appVersion. |
 | frontend.ingress.annotations | object | `{}` |  |
 | frontend.ingress.className | string | `""` |  |
 | frontend.ingress.enabled | bool | `false` |  |
@@ -73,16 +73,20 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | frontend.ingress.hosts[0].paths[0].path | string | `"/"` |  |
 | frontend.ingress.hosts[0].paths[0].pathType | string | `"ImplementationSpecific"` |  |
 | frontend.ingress.tls | list | `[]` |  |
+| frontend.init.securityContext.allowPrivilegeEscalation | bool | `false` |  |
+| frontend.init.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| frontend.init.securityContext.readOnlyRootFilesystem | bool | `true` |  |
+| frontend.init.securityContext.runAsNonRoot | bool | `false` |  |
+| frontend.init.securityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | frontend.nodeSelector | object | `{}` |  |
 | frontend.podAnnotations | object | `{}` |  |
 | frontend.podSecurityContext | object | `{}` |  |
 | frontend.replicaCount | int | `2` |  |
 | frontend.resources | object | `{}` |  |
 | frontend.securityContext.allowPrivilegeEscalation | bool | `false` |  |
-| frontend.securityContext.capabilities.add[0] | string | `"CAP_CHOWN"` |  |
-| frontend.securityContext.capabilities.add[1] | string | `"CAP_SETGID"` |  |
-| frontend.securityContext.capabilities.add[2] | string | `"CAP_SETUID"` |  |
 | frontend.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
+| frontend.securityContext.readOnlyRootFilesystem | bool | `true` |  |
+| frontend.securityContext.runAsNonRoot | bool | `true` |  |
 | frontend.securityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | frontend.service.port | int | `80` |  |
 | frontend.service.type | string | `"ClusterIP"` |  |
