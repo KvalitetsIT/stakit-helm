@@ -159,8 +159,8 @@ frontend:
       capabilities:
         drop:
           - ALL
-      readOnlyRootFilesystem: true
-      runAsNonRoot: false
+      readOnlyRootFilesystem: false
+      runAsNonRoot: true
       seccompProfile:
         type: RuntimeDefault
 
