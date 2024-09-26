@@ -17,7 +17,7 @@ serviceAccount:
 
 backend: 
   replicaCount: 2
-
+  podLabels: {}
   image:
     repository: kvalitetsit/stakit-backend
     pullPolicy: IfNotPresent
@@ -124,6 +124,7 @@ nginxImageOverride: ""
 
 frontend:
   replicaCount: 2
+  podLabels: {}
 
   image:
     repository: kvalitetsit/stakit-frontend

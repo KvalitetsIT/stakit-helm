@@ -20,6 +20,9 @@ spec:
       {{- end }}
       labels:
         {{- include "stakit.backend.selectorLabels" . | nindent 8 }}
+        {{- with .Values.frontend.podLabels }}
+          {{- toYaml . | nindent 8 }}
+        {{- end }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
