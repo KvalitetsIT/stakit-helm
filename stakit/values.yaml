@@ -129,7 +129,7 @@ frontend:
     repository: kvalitetsit/stakit-frontend
     pullPolicy: IfNotPresent
     # -- Overrides the image tag whose default is the chart appVersion.
-    tag: "0.2.4"
+    tag: "0.2.5"
 
   deployment:
     env: 
@@ -153,19 +153,24 @@ frontend:
 
   podSecurityContext: {}
 
+  init:
+    securityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - ALL
+      readOnlyRootFilesystem: true
+      runAsNonRoot: false
+      seccompProfile:
+        type: RuntimeDefault
+
   securityContext:
+    allowPrivilegeEscalation: false
     capabilities:
       drop:
         - ALL
-      add:
-        - CAP_CHOWN
-        - CAP_SETGID
-        - CAP_SETUID
-#    readOnlyRootFilesystem: true
-    allowPrivilegeEscalation: false
-#    runAsNonRoot: true
-#    runAsUser: 11000
-#    runAsGroup: 11000
+    readOnlyRootFilesystem: true
+    runAsNonRoot: true
     seccompProfile:
       type: RuntimeDefault
 
