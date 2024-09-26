@@ -81,15 +81,10 @@ spec:
             timeoutSeconds: 1
           resources:
             {{- toYaml .Values.frontend.resources | nindent 12 }}
+          {{- with .Values.frontend.securityContext }}
           securityContext:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - ALL
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
-            seccompProfile:
-              type: RuntimeDefault
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
           volumeMounts:
             - mountPath: /etc/nginx
               name: etc
@@ -134,7 +129,11 @@ spec:
               name: nginx-cache
             - mountPath: /temp/var/run
               name: var
-      securityContext: {}
+          {{- with .Values.frontend.init.securityContext }}
+          securityContext:
+            {{- toYaml . | nindent 12 }}
+          {{- end }}
+      
       serviceAccountName: default
       volumes:
         - emptyDir: {}
