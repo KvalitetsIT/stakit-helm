@@ -40,6 +40,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | backend.ingress.tls | list | `[]` |  |
 | backend.nodeSelector | object | `{}` |  |
 | backend.podAnnotations | object | `{}` |  |
+| backend.podLabels | object | `{}` |  |
 | backend.podSecurityContext | object | `{}` |  |
 | backend.replicaCount | int | `2` |  |
 | backend.resources | object | `{}` |  |
@@ -80,6 +81,7 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | frontend.init.securityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | frontend.nodeSelector | object | `{}` |  |
 | frontend.podAnnotations | object | `{}` |  |
+| frontend.podLabels | object | `{}` |  |
 | frontend.podSecurityContext | object | `{}` |  |
 | frontend.replicaCount | int | `2` |  |
 | frontend.resources | object | `{}` |  |
