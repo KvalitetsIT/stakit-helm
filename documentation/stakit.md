@@ -75,8 +75,8 @@ A helm chart for deploying Stakit frontend and backend in Kubernetes.
 | frontend.ingress.tls | list | `[]` |  |
 | frontend.init.securityContext.allowPrivilegeEscalation | bool | `false` |  |
 | frontend.init.securityContext.capabilities.drop[0] | string | `"ALL"` |  |
-| frontend.init.securityContext.readOnlyRootFilesystem | bool | `true` |  |
-| frontend.init.securityContext.runAsNonRoot | bool | `false` |  |
+| frontend.init.securityContext.readOnlyRootFilesystem | bool | `false` |  |
+| frontend.init.securityContext.runAsNonRoot | bool | `true` |  |
 | frontend.init.securityContext.seccompProfile.type | string | `"RuntimeDefault"` |  |
 | frontend.nodeSelector | object | `{}` |  |
 | frontend.podAnnotations | object | `{}` |  |
